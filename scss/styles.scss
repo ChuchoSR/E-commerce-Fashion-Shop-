@@ -759,3 +759,130 @@ img {
     box-shadow: var(--box-shadow-1);
     cursor: pointer;
 }
+
+/* -----SECCION DE PRODUCTOS--------- */
+.categories{
+    .products{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        gap: 7rem 4rem;
+        padding-top: 4rem;
+    }
+
+    .product{
+        border-radius: 2.5rem;
+        border: 1px solid rgba(#909090, 25%);
+        overflow: hidden;
+        transition: 0.3s;
+
+        .top{
+            background: var(--grey-color);
+            height: 30rem;
+            justify-content: center;
+            position: relative;
+            transition: 0.3s;
+
+            img{
+                height: 23rem;
+            }
+
+            .icon{
+                position: absolute;
+                top: 2rem;
+                right: 2rem;
+                width: 4rem;
+                height: 4rem;
+                background-color: var(--primary-color);
+                color: var(--white-color);
+                border-radius: 50%;
+                font-size: 2.5rem;
+                justify-content: center;
+                cursor: pointer;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s;
+            }
+        }
+
+        .bottom{
+            padding: 2.5rem 2rem;
+            background-color: var(--white-color);
+
+            h4{
+                font: 1.7rem;
+                height: 5rem;
+                transition: 0.3s;
+            }
+            
+            .d-flex{
+                justify-content: space-between;
+
+                &:first-child{
+                    margin-bottom: 1.5rem;
+                    align-items: flex-start;
+                }
+            }
+
+            .cart-btn{
+                color: var(--white-color);
+                background-color: var(--primary-color);
+                border-radius: 1rem;
+                padding: 0.8rem 1.5rem;
+                white-space: nowrap;
+                visibility: hidden;
+                opacity: 0;
+                transition: 0.3s;
+            }
+
+            .price{
+                color: #909090;
+                font-weight: 500;
+            }
+
+            .rating{
+                color: var(--primary-color);
+
+                i:not(:last-child){
+                    margin-right: 0.3rem;
+                }
+            }
+        }
+
+        &:hover{
+            border: none;
+            transform: scale(1.1);
+            box-shadow: var(--box-shadow-1);
+
+            .top{
+                background: var();
+
+                .icon{
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            .cart-btn{
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    }
+
+    .bottom{
+        justify-content: center;
+        margin-top: 8rem;
+
+        .btn{
+            display: inline-block;
+            padding: 1.5rem 6rem;
+            border-radius: 1rem;
+            color: var(--white-color);
+            font-weight: 500;
+            font-size: 1.8rem;
+            background: var(--btn-gradient);
+            box-shadow: var(--box-shadow-1);
+            cursor: pointer;
+        }
+    }
+}

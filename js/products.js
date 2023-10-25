@@ -114,3 +114,94 @@ filters.forEach((filter) =>
     swiper.update();/*Actualiza la instancia de Swiper (swiper) para reflejar los cambios en el carrusel después de aplicar el filtro.*/
     });
 });
+
+
+/* -----------------PRODUCTOS------------------------ */
+
+const categoriesProducts = document.querySelector('.categories .products');
+const loadMore = document.querySelector('.loadmore');
+
+let currentIndex = 0;
+
+async function loadData() {
+    let maxResult = 8;
+    let products = await getProducts();
+
+    if(currentIndex >= products.length) {
+        loadMore.disable = true;
+        loadMore.innerText = "No hay mas productos";
+        return;
+    }
+
+    for (var i = 0; i < maxResult; i++) {
+        const product = products[i + currentIndex];
+        categoriesProducts.insertAdjacentHTML(
+            'beforeend',
+            `
+            <div class="product">
+            <div class="top d-flex">
+                <img 
+                src=${product.url} 
+                alt="product" 
+                loading="lazy"
+                />
+                <div class="icon d-flex">
+                    <i class="bx bxs-heart"></i>
+                </div>
+            </div>
+            <div class="bottom">
+                <div class="d-flex">
+                    <h4>${product.title}</h4>
+                    <a href="" class="btn cart-btn">Add to Cart</a>
+                </div>
+                <div class="d-flex">
+                    <div class="price">${product.price}</div>
+                        <div class="rating">
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                            <i class="bx bxs-star"></i>
+                        </div>
+                </div>
+            </div>
+        </div>
+            `
+        );
+    }
+
+    currentIndex += maxResult;
+}
+
+loadMore.addEventListener('click', loadData);
+
+/* --------EXPLICACION DEL CODIGO-----------
+
+Este código es JavaScript y HTML combinados para crear una funcionalidad que carga productos en una página web cuando se hace clic en el botón "Load More". A continuación, te explico el código paso a paso:
+
+const categoriesProducts = document.querySelector('.categories .products'); y const loadMore = document.querySelector('.loadmore');: Estas líneas de código obtienen referencias a elementos HTML en el documento. categoriesProducts obtiene un elemento con la clase "categories" que contiene un elemento con la clase "products". loadMore obtiene un elemento con la clase "loadmore".
+
+let currentIndex = 0;: Esta variable se utiliza para realizar un seguimiento del índice actual de productos que se han cargado en la página.
+
+async function loadData() { ... }: Esto define una función llamada loadData que se ejecutará cuando se haga clic en el botón "Load More". La función es asíncrona (async) porque realiza una operación asincrónica para obtener datos de productos.
+
+let maxResult = 8;: Esta variable define el número máximo de productos a cargar cada vez que se hace clic en el botón "Load More".
+
+let products = await getProducts();: Se utiliza await para esperar a que la función getProducts() devuelva los datos de los productos. La función getProducts() probablemente realiza una solicitud asincrónica (por ejemplo, una solicitud a un servidor) para obtener los datos.
+
+if (currentIndex >= products.length) { ... }: Esta condición verifica si ya se han cargado todos los productos disponibles. Si es así, desactiva el botón "Load More" y muestra un mensaje indicando que no hay más productos disponibles.
+
+El bucle for se utiliza para generar elementos HTML para los productos. Recorre los datos de productos y utiliza insertAdjacentHTML para agregar el HTML al elemento categoriesProducts.
+
+El HTML dentro de insertAdjacentHTML crea una estructura de producto con información, como imagen, título, precio y calificación, que se obtiene de los datos de productos.
+
+currentIndex += maxResult; se utiliza para actualizar el índice actual después de cargar los productos.
+
+loadMore.addEventListener('click', loadData); agrega un oyente de eventos al botón "Load More" para que cuando se haga clic en él, se ejecute la función loadData, que carga más productos en la página.
+
+En resumen, este código permite cargar más productos en una página web a medida que se hace clic en el botón "Load More", utilizando datos de productos obtenidos asincrónicamente a través de la función getProducts().
+
+
+
+ */
+
